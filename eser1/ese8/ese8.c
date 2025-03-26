@@ -6,6 +6,7 @@
 #include <time.h>
 // parent deve mandare una la stringa con il nome di un file "esempio.c" al child e ques'ultimo lo deve 
 // rinominare il file a piacere
+// EDIT :ho capito male la consegna è un po al contrario ma non cambia niente
 // lascio lo spazio cosi non vedrete subito la soluzione
 
 
@@ -65,6 +66,10 @@ int main()
         // 3) buffer è la varibile contenente il il nome del file al quale bisogna cambiare il nome
         // 4) "pippo_con_pluto.c" è il nuovo nome del file
         // 5)  (char *)NULL segna la fine dei parametri
+
+
+        //il prof ha usato execl pero ha dovuto specificare il path
+        //exelc("/bin/mv", "mv", "esempio.c", bufferpipe, (char *)0)
     }
     else if (pid > 0) // parent
     {   
