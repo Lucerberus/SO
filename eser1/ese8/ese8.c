@@ -5,8 +5,9 @@
 #include <string.h>
 #include <time.h>
 // parent deve mandare una la stringa con il nome di un file "esempio.c" al child e ques'ultimo lo deve 
-// rinominare il file a piacere
-// EDIT :ho capito male la consegna è un po al contrario ma non cambia niente
+// rinominare il file "esempio.c" con un nome a piacere.
+// EDIT :ho capito male la consegna è un po al contrario, il parent manda un nome di un file e il child lo rinnomina 
+// in esempio.c
 // lascio lo spazio cosi non vedrete subito la soluzione
 
 
