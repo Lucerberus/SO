@@ -1,9 +1,8 @@
 public class Passeggeri extends Thread
 {
     private int Nperosne;
-    private boolean priority;
     private int id;
-    private int dim_bagaglio;
+    private int dim_bagaglio; // 1 = ordinario --- 2 = grande
 
     private Aeroporto airport;
 
@@ -12,15 +11,34 @@ public class Passeggeri extends Thread
     {
         this.id=id;
         this.Nperosne= Npersone;
-        this.priority = priority;
         this.dim_bagaglio=dim_bagaglio;
         this.airport=airport;
     }
 
     public void run()
     {
+        airport.in_coda(this);
+    }
+    // Getter methods with "this"
+    public int getNperosne()
 
+    {
+        return this.Nperosne;
     }
 
+    public long getId()
+    {
+        return this.id;
+    }
+
+    public int getDim_bagaglio()
+    {
+        return this.dim_bagaglio;
+    }
+
+    public Aeroporto getAirport()
+    {
+        return this.airport;
+    }
 
 }
