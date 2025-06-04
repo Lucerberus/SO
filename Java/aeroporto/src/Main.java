@@ -16,7 +16,6 @@ public class Main {
         // 1) Creo le postazioni in modo casuale, metà assistite e metà self‐drop
         List<Postazioni> listaPostazioni = new ArrayList<>();
         for (int i = 0; i < N_POSTAZIONI; i++) {
-            // Supponiamo che il costruttore Postazioni accetti un boolean:
             // true = postazione assistita, false = postazione self‐drop
             boolean assistita = (i < N_POSTAZIONI / 2);
             Postazioni p = new Postazioni(i + 1, assistita, aeroporto);
@@ -31,24 +30,13 @@ public class Main {
         List<Thread> threadPasseggeri = new ArrayList<>();
         for (int id = 1; id <= numPasseggeri; id++) {
             // Ogni passeggero viene creato con un riferimento all'aeroporto
-            // e a un bagaglio casuale: true = bagaglio grande (solo assistita), false = bagaglio ordinario
+            // e a un bagaglio casuale: 2 = bagaglio grande (solo assistita), 1 = bagaglio ordinario
             int bagaglioGrande = 1 + random.nextInt(2 - 1 + 1);
             int npersone = 1 + random.nextInt(2 - 1 + 1);
             Passeggeri passeggero = new Passeggeri(id,npersone, bagaglioGrande, aeroporto);
-            Thread t = new Thread(passeggero, "Passeggero-" + id);
-            threadPasseggeri.add(t);
-            t.start();
-        }
+            passeggero.start();
+            threadPasseggeri.add(passeggero);
 
-        // 5) Attendo che tutti i thread passeggeri terminino
-        for (Thread t : threadPasseggeri) {
-            try {
-                t.join();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
         }
-
-        System.out.println("\nTutti i passeggeri hanno completato il check‐in. Chiusura aeroporto.");
     }
 }

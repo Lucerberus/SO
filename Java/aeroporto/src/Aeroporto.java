@@ -2,15 +2,16 @@ import java.util.LinkedList;
 
 public class Aeroporto
 {
+    // ecco le 3 code per ogni tipo di passegere
     private LinkedList<Passeggeri> priorita = new LinkedList<Passeggeri>();
     private LinkedList<Passeggeri> self = new LinkedList<Passeggeri>();//1.76€/L
     private LinkedList<Passeggeri> servito = new LinkedList<Passeggeri>();//2.01€/L
     private Passeggeri imbarcato;
-    private static int c=10;
+    private int c=0;// mi serve a gestire la concorreza
 
     public synchronized void in_coda(Passeggeri p)//solo passeggeri
     {
-        System.out.println("Arriva il passegero con\nid: "+p.getId()+"\nNumero persone: "+p.getNperosne()+"\nBagalio: "+p.getDim_bagaglio());
+        System.out.println("Arriva il "+p.toString());
         if (p.getNperosne() > 1)
         {
             priorita.add(p);
@@ -63,16 +64,17 @@ public class Aeroporto
                 }
             }else
             {
-                if(priorita.isEmpty())
-                {
-                    System.out.println("la coda priorità è vuota, controllo coda servito");
-                }else// c'è qualcuno in priority
-                {
+                if(!priorita.isEmpty() && c <=5) {
+
                     System.out.println("c'è qualcuno in coda prelevo il primo mal capitato");
                     imbarcato = priorita.removeFirst();
                     Thread.sleep((int) (Math.random() * 100));
-                    System.out.println("La postazione "+pos.getId()+" ha servito il passeggero: " + imbarcato.getId()+"dalla coda priorita");
-                    notify();
+                    System.out.println("La postazione " + pos.getId() + " ha servito il passeggero: " + imbarcato.getId() + "dalla coda priorita");
+                    notifyAll();
+                    c++;
+                } else if (c > 6)
+                {
+                    c=0;
                 }
 
                 if(!servito.isEmpty())
@@ -81,7 +83,7 @@ public class Aeroporto
                     imbarcato = servito.removeFirst();
                     Thread.sleep((int) (Math.random() * 100));
                     System.out.println("La postazione "+pos.getId()+" ha servito il passeggero: " + imbarcato.getId()+"dalla coda servito");
-                    notify();
+                    notifyAll();
                 }
             }
         }

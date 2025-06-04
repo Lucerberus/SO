@@ -17,7 +17,7 @@ public class Passeggeri extends Thread
         this.airport=airport;
     }
 
-    public void run()
+    public void run() // mettu uno slip randomico, cosi i passeggeri arrivano in maniera differenziata
     {
         try {
             Thread.sleep((int) (Math.random() * 101));
@@ -27,7 +27,7 @@ public class Passeggeri extends Thread
         System.out.println("il passeggero si è messo in coda");
         airport.in_coda(this);
     }
-    // Getter methods with "this"
+    // metodi get
     public int getNperosne()
 
     {
@@ -49,4 +49,13 @@ public class Passeggeri extends Thread
         return this.airport;
     }
 
+    @Override
+    public String toString() {
+        return "Passeggero{" +
+                "Nperosne=" + Nperosne +
+                ", id=" + id +
+                ", dim_bagaglio=" + dim_bagaglio +
+                ", airport=" + airport +
+                '}';
+    }
 }
