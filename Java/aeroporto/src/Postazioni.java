@@ -11,7 +11,14 @@ public class Postazioni extends Thread {
 
     public void run()
     {
-
+        while(true)
+        {
+            try {
+                airport.serviPasseggero(this);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     public long getId() {

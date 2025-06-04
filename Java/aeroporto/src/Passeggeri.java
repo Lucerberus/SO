@@ -1,3 +1,5 @@
+import static java.lang.Thread.sleep;
+
 public class Passeggeri extends Thread
 {
     private int Nperosne;
@@ -7,7 +9,7 @@ public class Passeggeri extends Thread
     private Aeroporto airport;
 
 
-    public Passeggeri(int id,int Npersone, boolean priority, int dim_bagaglio, Aeroporto airport)
+    public Passeggeri(int id,int Npersone, int dim_bagaglio, Aeroporto airport)
     {
         this.id=id;
         this.Nperosne= Npersone;
@@ -17,6 +19,12 @@ public class Passeggeri extends Thread
 
     public void run()
     {
+        try {
+            Thread.sleep((int) (Math.random() * 101));
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("il passeggero si è messo in coda");
         airport.in_coda(this);
     }
     // Getter methods with "this"
