@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Cliente extends Thread {
     private int id;
     private boolean caffe;
@@ -5,7 +7,7 @@ public class Cliente extends Thread {
     private int tipo_gelato; // 1 brioche 2 cono
     private double tot;
     private  Bar baretto;
-
+    private Random random = new Random();
     public Cliente(int id, boolean caffe, boolean gelato, int tipo_gelato, Bar baretto)
     {
         this.id = id;
@@ -16,10 +18,10 @@ public class Cliente extends Thread {
         this.tot = 0.0;
     }
 
-    public void runnt()
+    public void run()
     {
         try {
-            Thread.sleep((int) (Math.random() * 500));
+            Thread.sleep((random.nextInt(31)+10)*1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

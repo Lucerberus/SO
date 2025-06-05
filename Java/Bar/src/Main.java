@@ -10,6 +10,7 @@ public class Main {
         bro.start();
         Random random=new Random();
         int numCliente = 20 + random.nextInt(50 - 20 + 1);
+        System.out.println("Numero di clienti: " + numCliente);
         List<Cliente> lista_clienti = new ArrayList<>();
         for (int id = 1; id <= numCliente; id++)
         {
