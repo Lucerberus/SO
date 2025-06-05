@@ -50,4 +50,97 @@ public class Bar
         }
     }
 
+    public synchronized void serviCliente(Gelabarman p) throws InterruptedException {
+        if(Caffe.isEmpty() && GelatoCaffe.isEmpty() && GelatoCono.isEmpty() && GelatoBrioche.isEmpty() && Cassa.isEmpty())
+        {
+            System.out.println("Non ce nessuno Il GelaBarman aspetta");
+            wait();
+        }
+        //probabilmente farò qui un if qui che controlla se in cassa ci sono più di 8 persone
+        // se si vado a svuotare la cassa prima
+        if(Cassa.size() >= 8 || (Caffe.isEmpty() && GelatoCaffe.isEmpty() && GelatoCono.isEmpty() && GelatoBrioche.isEmpty() && !Cassa.isEmpty()))
+        {
+            int num_cliente = Cassa.size();
+            for(int i = 0; i< num_cliente; i++)
+            {
+                Cliente c = Cassa.removeFirst();
+                System.out.println("Il "+c.toString()+" paga un totale di: "+c.getTot());
+                try {
+                    Thread.sleep((int) Math.random() * 30);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }else
+        {
+            if(!GelatoBrioche.isEmpty())
+            {
+                Cliente c = GelatoBrioche.removeFirst();
+                System.out.println("Il Gelabarman sta servendo il "+c.toString()+"");
+                c.IncrTot(p.getPrezzo_gelato_brioche());
+                try {
+                    Thread.sleep((int) Math.random() * 100);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                if(c.isCaffe())
+                {
+                    GelatoCaffe.add(c);
+                    System.out.println("Il "+c.toString()+" vuole prendere anche il caffe, è adanto a mettersi in coda");
+                }else
+                {
+                    Cassa.add(c);
+                    System.out.println("Il "+c.toString()+" è andato a mettersi in cassa");
+                }
+            }
+            if(!GelatoCono.isEmpty())
+            {
+                Cliente c = GelatoCono.removeFirst();
+                System.out.println("Il Gelabarman sta servendo il "+c.toString()+"");
+                c.IncrTot(p.getPrezzo_gelato_cono());
+
+                try {
+                    Thread.sleep((int) Math.random() * 100);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                if(c.isCaffe())
+                {
+                    GelatoCaffe.add(c);
+                    System.out.println("Il cliente vuole prendere anche il caffe, è adanto a mettersi in coda");
+                }else
+                {
+                    Cassa.add(c);
+                    System.out.println("Il "+c.toString()+" è andato a mettersi in cassa");
+                }
+            }
+            if(!GelatoCaffe.isEmpty())
+            {
+                Cliente c = GelatoCaffe.removeFirst();
+                System.out.println("Il Gelabarman sta servendo il "+c.toString()+"");
+                c.IncrTot(p.getPrezzo_caffe());
+                try {
+                    Thread.sleep((int) Math.random() * 100);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                Cassa.add(c);
+                System.out.println("Il "+c.toString()+" è andato a mettersi in cassa");
+            }
+            if(!Caffe.isEmpty())
+            {
+                Cliente c = Caffe.removeFirst();
+                System.out.println("Il Gelabarman sta servendo il "+c.toString()+"");
+                c.IncrTot(p.getPrezzo_caffe());
+                try {
+                    Thread.sleep((int) Math.random() * 100);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                Cassa.add(c);
+                System.out.println("Il "+c.toString()+" è andato a mettersi in cassa");
+            }
+        }
+        notifyAll();
+    }
 }

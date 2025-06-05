@@ -4,19 +4,26 @@ public class Cliente extends Thread {
     private  boolean gelato;
     private int tipo_gelato; // 1 brioche 2 cono
     private double tot;
+    private  Bar baretto;
 
-    public Cliente(int id, boolean caffe, boolean gelato, int tipo_gelato)
+    public Cliente(int id, boolean caffe, boolean gelato, int tipo_gelato, Bar baretto)
     {
         this.id = id;
         this.caffe = caffe;
         this.gelato = gelato;
         this.tipo_gelato = tipo_gelato;
+        this.baretto=baretto;
         this.tot = 0.0;
     }
 
     public void run()
     {
-
+        try {
+            Thread.sleep((int) (Math.random() * 500));
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        baretto.in_line(this);
     }
     public long getId() {
         return id;
@@ -49,7 +56,6 @@ public class Cliente extends Thread {
                 ", caffe=" + caffe +
                 ", gelato=" + gelato +
                 ", tipo_gelato=" + tipo_gelato +
-                ", tot=" + tot +
                 '}';
     }
 }
