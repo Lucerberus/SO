@@ -16,7 +16,7 @@ public class Cliente extends Thread {
         this.tot = 0.0;
     }
 
-    public void run()
+    public void runnt()
     {
         try {
             Thread.sleep((int) (Math.random() * 500));
