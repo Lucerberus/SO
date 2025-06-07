@@ -50,7 +50,6 @@ public class Laboratorio
             {
                 System.out.println(a.toString()+" ha terminato di servire il "+c.toString()+" il cliente sta per pagare");
                 Thread.sleep((r.nextInt(10)) * 1000);
-                notifyAll();
             }
 
         }else

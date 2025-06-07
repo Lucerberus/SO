@@ -3,8 +3,7 @@ import java.util.Random;
 public class Cliente extends Thread {
     private int id;
     private int id_Analista;
-    private int tipo_analisi; // 1 brioche 2 cono
-    private Random r = new Random();
+    private int tipo_analisi; // 1 naso 2 sangue
     private Laboratorio lab;
 
     public Cliente(int id, int tipo_analisi, Laboratorio lab)
