@@ -4,7 +4,7 @@ Questo file README contiene la spiegazione dettagliata dei seguenti script `.sh`
 
 ---
 
-## ✅ [Esercizio 1 – Rinomina con prefisso](Eser1/README_Ese1.md) 
+## ✅ [Esercizio 1 – Rinomina con prefisso](Eser1/README.md) 
 
 **Script:** `Ese1.sh`  
 Riceve:
@@ -18,7 +18,7 @@ mv "$nomefile" "${prefisso}_${nomefile}"
 
 ---
 
-## ✅ [Esercizio 2 – Elenco file da directory](Eser2/README_ese2.md)
+## ✅ [Esercizio 2 – Elenco file da directory](Eser2/README.md)
 
 **Script:** `ese2.sh`  
 Riceve:
@@ -31,7 +31,7 @@ echo "$file" | awk -F / '{print $NF}'
 
 ---
 
-## ✅ [Esercizio 3 – Rinomina file in directory](Eser3/README_ese3.md)
+## ✅ [Esercizio 3 – Rinomina file in directory](Eser3/README.md)
 
 **Script:** `ese3.sh`  
 Riceve:
@@ -51,7 +51,7 @@ mv "$file" "$directory/${prefisso}_$(basename "$file")"
 
 ---
 
-## ✅ [Esercizio 5 – Cerca stringa in file `.txt`](Eser5/README_ese5.md)
+## ✅ [Esercizio 5 – Cerca stringa in file `.txt`](Eser5/README.md)
 
 **Script:** `ese5.sh`  
 Riceve:
@@ -65,7 +65,7 @@ awk -v arg="$pattern" '$0 ~ arg { print FILENAME }'
 
 ---
 
-## ✅ [Esercizio 6 – Estrazione email](Eser6/README_ese6.md)
+## ✅ [Esercizio 6 – Estrazione email](Eser6/README.md)
 
 **Script:** `ese6.sh`  
 Riceve:
